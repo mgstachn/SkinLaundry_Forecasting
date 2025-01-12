@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Data Analysis and Cleaning | Hyaluronic Acid Forecasting</title>
+  <meta name="description" content="Chapter 2 Data Analysis and Cleaning | Hyaluronic Acid Forecasting" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Data Analysis and Cleaning | Hyaluronic Acid Forecasting" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data Analysis and Cleaning | Hyaluronic Acid Forecasting" />
+  
+  
+  
+
+<meta name="author" content="Mary Grace Stachnik" />
+
+
+<meta name="date" content="2025-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="modeling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SLForecast</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#business-summary"><i class="fa fa-check"></i><b>1.1</b> Business Summary</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#technical-executive-summary"><i class="fa fa-check"></i><b>1.2</b> Technical Executive Summary</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3</b> Next Steps</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html"><i class="fa fa-check"></i><b>2</b> Data Analysis and Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#r-setup"><i class="fa fa-check"></i><b>2.1</b> R Setup</a></li>
+<li class="chapter" data-level="2.2" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#data-cleaning"><i class="fa fa-check"></i><b>2.2</b> Data Cleaning</a></li>
+<li class="chapter" data-level="2.3" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#data-aggregations"><i class="fa fa-check"></i><b>2.3</b> Data Aggregations</a></li>
+<li class="chapter" data-level="2.4" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#time-series-decomposition"><i class="fa fa-check"></i><b>2.4</b> Time Series Decomposition</a></li>
+<li class="chapter" data-level="2.5" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#differencing"><i class="fa fa-check"></i><b>2.5</b> Differencing</a></li>
+<li class="chapter" data-level="2.6" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#acf-and-pacf-plots"><i class="fa fa-check"></i><b>2.6</b> ACF and PACF Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>3</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modeling.html"><a href="modeling.html#exponential-smoothing-model"><i class="fa fa-check"></i><b>3.1</b> Exponential Smoothing Model</a></li>
+<li class="chapter" data-level="3.2" data-path="modeling.html"><a href="modeling.html#arimax-model"><i class="fa fa-check"></i><b>3.2</b> ARIMAX Model</a></li>
+<li class="chapter" data-level="3.3" data-path="modeling.html"><a href="modeling.html#prophet-model"><i class="fa fa-check"></i><b>3.3</b> Prophet Model</a></li>
+<li class="chapter" data-level="3.4" data-path="modeling.html"><a href="modeling.html#combined-models"><i class="fa fa-check"></i><b>3.4</b> Combined Models</a></li>
+<li class="chapter" data-level="3.5" data-path="modeling.html"><a href="modeling.html#final-forecast-accuracy"><i class="fa fa-check"></i><b>3.5</b> Final Forecast Accuracy</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hyaluronic Acid Forecasting</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-analysis-and-cleaning" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Data Analysis and Cleaning<a href="data-analysis-and-cleaning.html#data-analysis-and-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="r-setup" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> R Setup<a href="data-analysis-and-cleaning.html#r-setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I loaded in relevant libraries and imported the sales and promotional datasets.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-analysis-and-cleaning.html#cb1-1" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-2"><a href="data-analysis-and-cleaning.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="data-analysis-and-cleaning.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="data-analysis-and-cleaning.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="data-analysis-and-cleaning.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb1-6"><a href="data-analysis-and-cleaning.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(fable)</span>
+<span id="cb1-7"><a href="data-analysis-and-cleaning.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(fabletools)</span>
+<span id="cb1-8"><a href="data-analysis-and-cleaning.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-9"><a href="data-analysis-and-cleaning.html#cb1-9" tabindex="-1"></a><span class="fu">library</span>(imputeTS)</span>
+<span id="cb1-10"><a href="data-analysis-and-cleaning.html#cb1-10" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-11"><a href="data-analysis-and-cleaning.html#cb1-11" tabindex="-1"></a><span class="fu">library</span>(fable.prophet)</span>
+<span id="cb1-12"><a href="data-analysis-and-cleaning.html#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="data-analysis-and-cleaning.html#cb1-13" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb1-14"><a href="data-analysis-and-cleaning.html#cb1-14" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;C:/Users/Mary Grace Stachnik/OneDrive/Desktop/IAA/Skin Laundry&#39;</span>)</span>
+<span id="cb1-15"><a href="data-analysis-and-cleaning.html#cb1-15" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;2022-2024 Clinic Product Sales Data.csv&#39;</span>)</span>
+<span id="cb1-16"><a href="data-analysis-and-cleaning.html#cb1-16" tabindex="-1"></a>promotions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;Promotion details and dates.csv&#39;</span>)</span>
+<span id="cb1-17"><a href="data-analysis-and-cleaning.html#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="data-analysis-and-cleaning.html#cb1-18" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;C:/Users/Mary Grace Stachnik/OneDrive/Desktop/IAA/Skin Laundry/SkinLaundry_Forecasting&#39;</span>)</span></code></pre></div>
+</div>
+<div id="data-cleaning" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Data Cleaning<a href="data-analysis-and-cleaning.html#data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I converted all date columns from character to date types, extracted the Quarter of each observation, and calculated the number of promotional sales days in each quarter.</p>
+<p><strong>Assumption: If a promotion spans across 2 months, it is counted in the quarter of the end month.</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-analysis-and-cleaning.html#cb2-1" tabindex="-1"></a><span class="co"># Convert sales date column from character to date format and extract Month and Year</span></span>
+<span id="cb2-2"><a href="data-analysis-and-cleaning.html#cb2-2" tabindex="-1"></a>sales<span class="sc">$</span>sale.date <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(sales<span class="sc">$</span>sale.date, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
+<span id="cb2-3"><a href="data-analysis-and-cleaning.html#cb2-3" tabindex="-1"></a>sales<span class="sc">$</span>sale.month <span class="ot">&lt;-</span> <span class="fu">yearmonth</span>(sales<span class="sc">$</span>sale.date)</span>
+<span id="cb2-4"><a href="data-analysis-and-cleaning.html#cb2-4" tabindex="-1"></a>sales<span class="sc">$</span>sale.qtr <span class="ot">&lt;-</span> <span class="fu">yearquarter</span>(sales<span class="sc">$</span>sale.date)</span>
+<span id="cb2-5"><a href="data-analysis-and-cleaning.html#cb2-5" tabindex="-1"></a>sales<span class="sc">$</span>sale.dummyqtr <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">quarter</span>(sales<span class="sc">$</span>sale.date))</span>
+<span id="cb2-6"><a href="data-analysis-and-cleaning.html#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="data-analysis-and-cleaning.html#cb2-7" tabindex="-1"></a><span class="co"># Convert promotion date columns from character to date format and extract Month and Year</span></span>
+<span id="cb2-8"><a href="data-analysis-and-cleaning.html#cb2-8" tabindex="-1"></a>promotions<span class="sc">$</span>Start.Date <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(promotions<span class="sc">$</span>Start.Date, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
+<span id="cb2-9"><a href="data-analysis-and-cleaning.html#cb2-9" tabindex="-1"></a>promotions<span class="sc">$</span>End.Date <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(promotions<span class="sc">$</span>End.Date, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
+<span id="cb2-10"><a href="data-analysis-and-cleaning.html#cb2-10" tabindex="-1"></a>promotions<span class="sc">$</span>Start.Month <span class="ot">&lt;-</span> <span class="fu">yearmonth</span>(promotions<span class="sc">$</span>Start.Date)</span>
+<span id="cb2-11"><a href="data-analysis-and-cleaning.html#cb2-11" tabindex="-1"></a>promotions<span class="sc">$</span>End.Month <span class="ot">&lt;-</span> <span class="fu">yearmonth</span>(promotions<span class="sc">$</span>End.Date)</span>
+<span id="cb2-12"><a href="data-analysis-and-cleaning.html#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="data-analysis-and-cleaning.html#cb2-13" tabindex="-1"></a><span class="co"># Calculate the length of each promotion in days.</span></span>
+<span id="cb2-14"><a href="data-analysis-and-cleaning.html#cb2-14" tabindex="-1"></a>promotions<span class="sc">$</span>promotion.qtr <span class="ot">&lt;-</span> <span class="fu">yearquarter</span>(promotions<span class="sc">$</span>End.Date)</span>
+<span id="cb2-15"><a href="data-analysis-and-cleaning.html#cb2-15" tabindex="-1"></a>promotions<span class="sc">$</span>promotion.days <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(promotions<span class="sc">$</span>End.Date <span class="sc">-</span> promotions<span class="sc">$</span>Start.Date),<span class="dv">0</span>)</span></code></pre></div>
+</div>
+<div id="data-aggregations" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Data Aggregations<a href="data-analysis-and-cleaning.html#data-aggregations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I aggregated all data to the Quarter/Year level and summed the total sales and total promotional days. I joined the sales and promotional datasets.</p>
+<p><strong>Assumption: Sales for Q3 2024 are pre-planned</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-analysis-and-cleaning.html#cb3-1" tabindex="-1"></a><span class="co"># Calculate total number of days a promotion is running during each quarter</span></span>
+<span id="cb3-2"><a href="data-analysis-and-cleaning.html#cb3-2" tabindex="-1"></a>promotion.agg <span class="ot">&lt;-</span> promotions <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(promotion.qtr) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="data-analysis-and-cleaning.html#cb3-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">promotion.days =</span> <span class="fu">sum</span>(promotion.days)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="data-analysis-and-cleaning.html#cb3-4" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb3-5"><a href="data-analysis-and-cleaning.html#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="data-analysis-and-cleaning.html#cb3-6" tabindex="-1"></a><span class="co"># Filter to Hyaluronic Acid at Clinic G for Jan 2022 to Sep 2024 and group sales by month</span></span>
+<span id="cb3-7"><a href="data-analysis-and-cleaning.html#cb3-7" tabindex="-1"></a>gha <span class="ot">&lt;-</span> sales <span class="sc">%&gt;%</span> <span class="fu">filter</span>(clinic.name<span class="sc">==</span><span class="st">&quot;Clinic G&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb3-8"><a href="data-analysis-and-cleaning.html#cb3-8" tabindex="-1"></a>                          product.name<span class="sc">==</span><span class="st">&quot;Hyaluronic Acid Serum&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb3-9"><a href="data-analysis-and-cleaning.html#cb3-9" tabindex="-1"></a>                          sale.date <span class="sc">&lt;</span> <span class="fu">as.POSIXct</span>(<span class="st">&#39;10/1/2024&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-10"><a href="data-analysis-and-cleaning.html#cb3-10" tabindex="-1"></a>  <span class="fu">group_by</span>(sale.qtr, sale.dummyqtr) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total_hyaluronic =</span> <span class="fu">sum</span>(quantity.sold)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="data-analysis-and-cleaning.html#cb3-11" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;sale.qtr&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-analysis-and-cleaning.html#cb5-1" tabindex="-1"></a><span class="co"># Join promotion details onto dataset</span></span>
+<span id="cb5-2"><a href="data-analysis-and-cleaning.html#cb5-2" tabindex="-1"></a>gha <span class="ot">&lt;-</span> <span class="fu">left_join</span>(gha, promotion.agg, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;sale.qtr&quot;</span> <span class="ot">=</span> <span class="st">&quot;promotion.qtr&quot;</span>))</span>
+<span id="cb5-3"><a href="data-analysis-and-cleaning.html#cb5-3" tabindex="-1"></a>gha</span></code></pre></div>
+<pre><code>## # A tibble: 11 × 4
+##    sale.qtr sale.dummyqtr total_hyaluronic promotion.days
+##       &lt;qtr&gt; &lt;fct&gt;                    &lt;int&gt;          &lt;dbl&gt;
+##  1  2022 Q1 1                          100             45
+##  2  2022 Q2 2                          107             11
+##  3  2022 Q3 3                           99             28
+##  4  2022 Q4 4                          112             33
+##  5  2023 Q1 1                          105             19
+##  6  2023 Q2 2                           97              3
+##  7  2023 Q3 3                          122             13
+##  8  2023 Q4 4                          137             33
+##  9  2024 Q1 1                           78             20
+## 10  2024 Q2 2                          231             21
+## 11  2024 Q3 3                          134             13</code></pre>
+</div>
+<div id="time-series-decomposition" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Time Series Decomposition<a href="data-analysis-and-cleaning.html#time-series-decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I converted the series to a time series object, split into train, validation, and test datasets, and checked that there were no implicit or explicit missing time periods.</p>
+<p>I visualized the data using STL time series decomposition. The insights gained from visualization plus manually looking over the dataset include an increasing trend starting in the middle of 2023, seasonal spikes in April and November, and what seems to be an outlier value or the start of a new increased trend in sales in Q2 of 2024.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-analysis-and-cleaning.html#cb7-1" tabindex="-1"></a><span class="co">#Convert series into a tsibble for time series analysis</span></span>
+<span id="cb7-2"><a href="data-analysis-and-cleaning.html#cb7-2" tabindex="-1"></a>ha_ts <span class="ot">&lt;-</span> <span class="fu">as_tsibble</span>(gha, <span class="at">index=</span>sale.qtr)</span>
+<span id="cb7-3"><a href="data-analysis-and-cleaning.html#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="data-analysis-and-cleaning.html#cb7-4" tabindex="-1"></a><span class="co"># Create training, validation, and test datasets</span></span>
+<span id="cb7-5"><a href="data-analysis-and-cleaning.html#cb7-5" tabindex="-1"></a><span class="co"># 2022/2023 as training, Q1/Q2 2024 as validation, Q3 2024 as test</span></span>
+<span id="cb7-6"><a href="data-analysis-and-cleaning.html#cb7-6" tabindex="-1"></a>train <span class="ot">&lt;-</span> ha_ts[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,]</span>
+<span id="cb7-7"><a href="data-analysis-and-cleaning.html#cb7-7" tabindex="-1"></a>val <span class="ot">&lt;-</span> ha_ts[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>,]</span>
+<span id="cb7-8"><a href="data-analysis-and-cleaning.html#cb7-8" tabindex="-1"></a>train_val <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(train,val)</span>
+<span id="cb7-9"><a href="data-analysis-and-cleaning.html#cb7-9" tabindex="-1"></a>test <span class="ot">&lt;-</span> ha_ts[<span class="dv">11</span>,]</span>
+<span id="cb7-10"><a href="data-analysis-and-cleaning.html#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="data-analysis-and-cleaning.html#cb7-11" tabindex="-1"></a><span class="co"># Determine if there are implicit or explicit time gaps in data</span></span>
+<span id="cb7-12"><a href="data-analysis-and-cleaning.html#cb7-12" tabindex="-1"></a><span class="co">#count_gaps(ha_ts)</span></span>
+<span id="cb7-13"><a href="data-analysis-and-cleaning.html#cb7-13" tabindex="-1"></a><span class="co">#scan_gaps(ha_ts)</span></span>
+<span id="cb7-14"><a href="data-analysis-and-cleaning.html#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="data-analysis-and-cleaning.html#cb7-15" tabindex="-1"></a><span class="co"># Perform STL decomposition to visualize training/validation data, as well as trend and seasonal patterns</span></span>
+<span id="cb7-16"><a href="data-analysis-and-cleaning.html#cb7-16" tabindex="-1"></a>dcmp <span class="ot">&lt;-</span> train_val <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">stl =</span> <span class="fu">STL</span>(total_hyaluronic))</span>
+<span id="cb7-17"><a href="data-analysis-and-cleaning.html#cb7-17" tabindex="-1"></a><span class="fu">components</span>(dcmp) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/Decomp-1.png" width="768" /></p>
+</div>
+<div id="differencing" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Differencing<a href="data-analysis-and-cleaning.html#differencing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I found that the optimal number of seasonal differences is 1, if using a seasonal ARIMA model. After taking 1 seasonal difference, no other differencing would be needed.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-analysis-and-cleaning.html#cb8-1" tabindex="-1"></a><span class="co"># Determine optimal number of seasonal differences, assuming monthly season</span></span>
+<span id="cb8-2"><a href="data-analysis-and-cleaning.html#cb8-2" tabindex="-1"></a><span class="fu">print</span>(train <span class="sc">%&gt;%</span> <span class="fu">features</span>(total_hyaluronic, unitroot_nsdiffs)) <span class="co">#1</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   nsdiffs
+##     &lt;int&gt;
+## 1       1</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-analysis-and-cleaning.html#cb10-1" tabindex="-1"></a><span class="co"># Determine if non-seasonal differences are needed after taking the 1st seasonal difference</span></span>
+<span id="cb10-2"><a href="data-analysis-and-cleaning.html#cb10-2" tabindex="-1"></a><span class="fu">print</span>(train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ha_diff =</span> <span class="fu">difference</span>(total_hyaluronic, <span class="at">lag=</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="data-analysis-and-cleaning.html#cb10-3" tabindex="-1"></a>        <span class="fu">features</span>(ha_diff, unitroot_ndiffs)) <span class="co">#0</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   ndiffs
+##    &lt;int&gt;
+## 1      0</code></pre>
+</div>
+<div id="acf-and-pacf-plots" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> ACF and PACF Plots<a href="data-analysis-and-cleaning.html#acf-and-pacf-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I found that there are no significant spikes in the ACF and PACF plots. If using an ARIMA model, this would correlate to (p,d,q) terms of (0,0,0).</p>
+<p>I found that after taking the first seasonal difference, there are also no significant spikes. If using a SARIMA model, this would correlate to (P,D,Q) terms of (0,1,0).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-analysis-and-cleaning.html#cb12-1" tabindex="-1"></a><span class="co"># Check ACF and PACF with no seasonal differencing</span></span>
+<span id="cb12-2"><a href="data-analysis-and-cleaning.html#cb12-2" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">gg_tsdisplay</span>(total_hyaluronic, <span class="at">plot_type=</span><span class="st">&#39;partial&#39;</span>) <span class="co"># No spikes, assume p=0,d=0,q=0</span></span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/plots-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-analysis-and-cleaning.html#cb13-1" tabindex="-1"></a><span class="co"># Check ACF and PACF after taking 1 seasonal difference</span></span>
+<span id="cb13-2"><a href="data-analysis-and-cleaning.html#cb13-2" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">gg_tsdisplay</span>(<span class="fu">difference</span>(total_hyaluronic, <span class="at">lag=</span><span class="dv">4</span>),</span>
+<span id="cb13-3"><a href="data-analysis-and-cleaning.html#cb13-3" tabindex="-1"></a>                       <span class="at">plot_type=</span><span class="st">&#39;partial&#39;</span>,<span class="at">lag=</span><span class="dv">8</span>) <span class="co"># No spikes, assume P=0,D=1,Q=0</span></span></code></pre></div>
+<pre><code>## Warning: Removed 4 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<pre><code>## Warning: Removed 4 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="bookdownproj_files/figure-html/plots-2.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mgstachn/SkinLaundry_Forecasting/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/mgstachn/SkinLaundry_Forecasting/blob/main/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

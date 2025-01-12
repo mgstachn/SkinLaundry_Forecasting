@@ -5,5 +5,289 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Summary
 
+## Business Summary
+
+My forecast for Hyaluronic Acid Serum for Clinic G during Q3 (July-September) 2024 is 168 units. In preparation for sales in Q3, I would encourage Clinic G to order approximately 168 serums in June, if ordering for the quarter, or 56 serums, if ordering for only the next month, July. 
+
+This forecast is within a 25% error, so based on upcoming promotional sales or the discretion of the Clinic G owner, this number could be dropped to 126 units for Q3 (42 units per month) or increased to 210 units (70 units per month).
+
+## Technical Executive Summary
+
+**Objective: Forecast Hyaluronic Acid Serum demand at Skin Laundry Clinic G for Q3 of 2024.** 
+
+The first step in this project was to perform data cleaning. I filtered the sales dataset to include only observations for Hyaluronic Acid at Clinic G from January 2022 through September 2024. I then grouped sales by quarter. To add in more relevant information for an accurate forecast, I used the promotions dataset to determine the total number of days within each quarter in which there was a promotion running. Finally, I transformed the series into a time series object, and split into training (2022-2023), validation (Q1-Q2 2024), and test (Q3 2024) datasets. I used the training dataset to build the models and the validation to determine accuracy. The test dataset was not included in any of the model-building process to prevent overfitting, and accuracy was only calculated for the final selected model.
+
+Next, I tested 3 types of models: Exponential Smoothing, ARIMAX with quarterly dummy variables and promotional sales dynamic regression, and Prophet with a regressor variable for promotional sales. Because of the limited data, with only 8 quarters in the training dataset, the Exponential Smoothing and ARIMAX models were unable to pick up on seasonality signal. **The final model I chose and applied to the test dataset was a Prophet Model with linear trend and multiplicative yearly seasonality. This model also included a regressor varible for the number of days within a quarter that there was a promotion running.** The Ljung Box test for this model showed no remaining autocorrelation.
+
+Finally, I determined the final forecast for Hyaluronic Acid Serum at Clinic G in Q3 2024 using the Prophet model. Since this was in the past, I was able to calculate the final accuracy, but this information was NOT used to further tune the model.
+
+**Final Forecast: 168**
+
+**Final Mean Absolute Percentage Error (MAPE): 25.6%**
+
+## Next Steps
+The next steps I would take in this project are the following:
+
+- Build more complex models with monthly aggregated data instead of quarterly aggregated data. This could find seasonal patterns that were not uncovered in the current modeling.
+
+- Split the promotional days into each separate promotion. Since the Hyaluronic Acid serum was included in each promotion, I considered them all equal, but looking at each type of promotion could uncover more insights.
+
+- Continue to gather more data to improve ESM and SARIMAX forecasting. Because I only had 2 periods of data, some of the more complex models would not run. I believe that simply having another year of data would resolve this issue.
+
+- Combine models. I did try to combine the Prophet and ARIMAX models, but it was not any more accurate on the validation set than the Prophet alone. After gathering more data, this could help pick up on additional signal the Prophet did not capture.
+
+
+# Data Analysis and Cleaning
+
+## R Setup
+
+I loaded in relevant libraries and imported the sales and promotional datasets.
+
+```{r ExecSummary, include=TRUE}
+# Load libraries
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+library(fpp3)
+library(fable)
+library(fabletools)
+library(lubridate)
+library(imputeTS)
+library(forecast)
+library(fable.prophet)
+
+# Read in data
+setwd('C:/Users/Mary Grace Stachnik/OneDrive/Desktop/IAA/Skin Laundry')
+sales <- read.csv('2022-2024 Clinic Product Sales Data.csv')
+promotions <- read.csv('Promotion details and dates.csv')
+
+setwd('C:/Users/Mary Grace Stachnik/OneDrive/Desktop/IAA/Skin Laundry/SkinLaundry_Forecasting')
+
+```
+
+## Data Cleaning
+
+I converted all date columns from character to date types, extracted the Quarter of each observation, and calculated the number of promotional sales days in each quarter.
+
+**Assumption: If a promotion spans across 2 months, it is counted in the quarter of the end month.**
+
+```{r Datasets, include=TRUE}
+# Convert sales date column from character to date format and extract Month and Year
+sales$sale.date <- as.POSIXct(sales$sale.date, format = "%m/%d/%Y")
+sales$sale.month <- yearmonth(sales$sale.date)
+sales$sale.qtr <- yearquarter(sales$sale.date)
+sales$sale.dummyqtr <- as.factor(quarter(sales$sale.date))
+
+# Convert promotion date columns from character to date format and extract Month and Year
+promotions$Start.Date <- as.POSIXct(promotions$Start.Date, format = "%m/%d/%Y")
+promotions$End.Date <- as.POSIXct(promotions$End.Date, format = "%m/%d/%Y")
+promotions$Start.Month <- yearmonth(promotions$Start.Date)
+promotions$End.Month <- yearmonth(promotions$End.Date)
+
+# Calculate the length of each promotion in days.
+promotions$promotion.qtr <- yearquarter(promotions$End.Date)
+promotions$promotion.days <- round(as.numeric(promotions$End.Date - promotions$Start.Date),0)
+```
+
+## Data Aggregations
+
+I aggregated all data to the Quarter/Year level and summed the total sales and total promotional days. I joined the sales and promotional datasets.
+
+**Assumption: Sales for Q3 2024 are pre-planned**
+
+```{r Aggregations, include=TRUE}
+# Calculate total number of days a promotion is running during each quarter
+promotion.agg <- promotions %>% group_by(promotion.qtr) %>% 
+  summarize(promotion.days = sum(promotion.days)) %>% 
+  ungroup()
+
+# Filter to Hyaluronic Acid at Clinic G for Jan 2022 to Sep 2024 and group sales by month
+gha <- sales %>% filter(clinic.name=="Clinic G" & 
+                          product.name=="Hyaluronic Acid Serum" &
+                          sale.date < as.POSIXct('10/1/2024', format = "%m/%d/%Y")) %>% 
+  group_by(sale.qtr, sale.dummyqtr) %>% summarize(total_hyaluronic = sum(quantity.sold)) %>% 
+  ungroup()
+
+# Join promotion details onto dataset
+gha <- left_join(gha, promotion.agg, by = c("sale.qtr" = "promotion.qtr"))
+gha
+```
+
+## Time Series Decomposition
+ 
+I converted the series to a time series object, split into train, validation, and test datasets, and checked that there were no implicit or explicit missing time periods.
+
+I visualized the data using STL time series decomposition. The insights gained from visualization plus manually looking over the dataset include an increasing trend starting in the middle of 2023, seasonal spikes in April and November, and what seems to be an outlier value or the start of a new increased trend in sales in Q2 of 2024.
+
+```{r Decomp, fig.show='hold', fig.width=8, fig.height=6, include=TRUE}
+#Convert series into a tsibble for time series analysis
+ha_ts <- as_tsibble(gha, index=sale.qtr)
+
+# Create training, validation, and test datasets
+# 2022/2023 as training, Q1/Q2 2024 as validation, Q3 2024 as test
+train <- ha_ts[1:8,]
+val <- ha_ts[9:10,]
+train_val <- dplyr::bind_rows(train,val)
+test <- ha_ts[11,]
+
+# Determine if there are implicit or explicit time gaps in data
+#count_gaps(ha_ts)
+#scan_gaps(ha_ts)
+
+# Perform STL decomposition to visualize training/validation data, as well as trend and seasonal patterns
+dcmp <- train_val %>% model(stl = STL(total_hyaluronic))
+components(dcmp) %>% autoplot() + theme_classic()
+```
+
+## Differencing
+
+I found that the optimal number of seasonal differences is 1, if using a seasonal ARIMA model. After taking 1 seasonal difference, no other differencing would be needed.
+
+```{r Diff, include=TRUE}
+# Determine optimal number of seasonal differences, assuming monthly season
+print(train %>% features(total_hyaluronic, unitroot_nsdiffs)) #1
+
+# Determine if non-seasonal differences are needed after taking the 1st seasonal difference
+print(train %>% mutate(ha_diff = difference(total_hyaluronic, lag=4)) %>%
+        features(ha_diff, unitroot_ndiffs)) #0
+```
+## ACF and PACF Plots
+
+I found that there are no significant spikes in the ACF and PACF plots. If using an ARIMA model, this would correlate to (p,d,q) terms of (0,0,0).
+
+I found that after taking the first seasonal difference, there are also no significant spikes. If using a SARIMA model, this would correlate to (P,D,Q) terms of (0,1,0).
+
+```{r plots, include=TRUE}
+# Check ACF and PACF with no seasonal differencing
+train %>% gg_tsdisplay(total_hyaluronic, plot_type='partial') # No spikes, assume p=0,d=0,q=0
+
+# Check ACF and PACF after taking 1 seasonal difference
+train %>% gg_tsdisplay(difference(total_hyaluronic, lag=4),
+                       plot_type='partial',lag=8) # No spikes, assume P=0,D=1,Q=0
+```
+
+# Modeling
+
+
+## Exponential Smoothing Model
+
+I used the autoETS() function to determine the optimal exponential smoothing model for the training data. My final ESM model had a multiplicative error term and no seasonal or trend terms. The model forecast 130 units of Hyaluronic Acid for both Q1 and Q2 2024 within the validation set, which corresponds to a MAPE of 55.2% The Ljung-Box test showed no remaining autocorrelation.
+
+```{r ESM, include=TRUE}
+
+# Train ESM model using the autoETS() function
+model_ETS <- train %>% 
+  model(
+    autoETS = ETS(total_hyaluronic)
+  )
+model_ETS
+
+# Create a forecast for the validation set
+model_ETS_for <- fabletools::forecast(model_ETS, val)
+model_ETS_for
+
+# Calculate accuracy for the ESM model on the validation set
+fabletools::accuracy(model_ETS_for, val)
+
+# Check for any remaining autocorrelation using the ljung_box test
+augment(model_ETS) %>% features(.innov,ljung_box, lag=4) # FTR, no autocorrelation
+
+```
+
+## ARIMAX Model
+
+I used the auto ARIMA() function to determine the optimal ARIMAX mdoel for the training data. My final ARIMA model had (p,d,q,)(P,D,Q) terms of (0,0,0)(0,0,0). Seasonality was accounted for through quarterly dummy variables, and dynamic regression was used for the number of days within each quarter when a promotion was running. The model forecast 50 units of Hyaluronic Acid Q1 2024 and 137 units for Q2 2024 within the validation set, which corresponds to a MAPE of 38.1% The Ljung-Box test showed no remaining autocorrelation.
+
+```{r ARIMA, include=TRUE}
+
+# Train ARIMA Model using the auto ARIMA function, using dummy variables instead of seasonal terms
+model_SARIMAX <- train %>%
+  model(
+    autoARIMA=ARIMA(total_hyaluronic ~ sale.dummyqtr + promotion.days))
+model_SARIMAX
+
+# Create a forecast for the validation set
+model_SARIMAX_for <- forecast(model_SARIMAX, val)
+model_SARIMAX_for
+
+# Calculate accuracy for the ARIMAX model on the validation set
+fabletools::accuracy(model_SARIMAX_for, val)
+
+# Check for any remaining autocorrelation using the ljung_box test
+augment(model_SARIMAX) %>% features(.innov, ljung_box, lag=4) # FTR, no autocorrelation
+```
+
+## Prophet Model
+
+I used the Prophet() function to determine the optimal Prophet for the training data. My final Prophet model had linear growth and multiplicative yearly seasonality, and a regressor variable was used for the number of days within each quarter when a promotion was running. The model forecast 92 units of Hyaluronic Acid Q1 2024 and 219 units for Q2 2024 within the validation set, which corresponds to a MAPE of 11.9% This was our lowest MAPE on the validation set, so it was chosen as the final model. The Ljung-Box test showed no remaining autocorrelation.
+
+```{r Prophet, include=TRUE}
+# Train Prophet Model, using a regressor variable for promotional days
+model_prophet_test <- train %>% 
+  model(prophet1 = prophet(total_hyaluronic ~ promotion.days + growth("linear") + season(period = "year", type="multiplicative")),
+        prophet2 = prophet(total_hyaluronic ~ promotion.days + growth("linear") + season(period = "year", type="additive"))
+  )
+
+model_prophet <- train %>% 
+  model(prophet1 = prophet(total_hyaluronic ~ xreg(promotion.days) + growth("linear") + season(period = "year", type="multiplicative")))
+
+# Create a forecast for the validation set
+model_prophet_for <- fabletools::forecast(model_prophet, val)
+model_prophet_for
+
+# Calculate accuracy for the Prophet model on the validation set
+fabletools::accuracy(model_prophet_for, val) 
+
+# Check for any remaining autocorrelation using the ljung_box test
+augment(model_prophet) %>% features(.innov, ljung_box, lag=4) # FTR, no autocorrelation
+```
+
+## Combined Models
+
+I combined all three models, as well as ESM+Prophet and ARIMAX+Prophet. The accuracy on the combined models was lower than the Prophet on its own, so combinations were not used as the final model.
+```{r Combo, include=TRUE}
+# Combined Models
+model_all <- train %>% 
+  model(
+    esm = ETS(total_hyaluronic),
+    arimax = ARIMA(total_hyaluronic ~ sale.dummyqtr + promotion.days),
+    prophet = prophet(total_hyaluronic ~ xreg(promotion.days) + growth("linear") + 
+                        season(period = "year", type="multiplicative"))
+  ) %>% 
+  mutate(combo = (esm+arimax+prophet)/3,
+         combo2 = (esm+prophet)/2,
+         combo3 = (arimax+prophet)/2)
+
+model_all
+
+# Create a forecast for the validation set
+model_all_for <- fabletools::forecast(model_all, val)
+model_all_for
+
+# Calculate accuracy for the combined models on the validation set
+fabletools::accuracy(model_all_for, val)
+```
+
+## Final Forecast Accuracy
+
+The final model was the Prophet model, corresponding to a MAPE of 11.9% on the validation.
+
+I combined the training and validation sets to update the model parameters before forecasting the test dataset, or Q3 2024. The final model had a prediction of 168 units of Hyaluronic Acid for Clinic G, corresponding to a MAPE of 25.6%.
+
+```{r Forecast, include=TRUE}
+# Use combined training and validation to create final prophet model for 2024 Q3 prediction
+model_final <- train_val %>% 
+  model(
+    prophetfinal = prophet(total_hyaluronic ~ xreg(promotion.days) + growth("linear") + 
+                             season(period = "year", type="multiplicative"))
+  )
+
+# Predict final forecast for Q3 2024 using the final model
+prophet_forecast_final <- model_final %>% select(prophetfinal) %>% fabletools::forecast(test)
+prophet_forecast_final
+
+# Calculate final accuracy for Q3 2024 forecast
+fabletools::accuracy(prophet_forecast_final, test)
+```

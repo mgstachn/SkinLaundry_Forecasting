@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9  | Hyaluronic Acid Forecasting</title>
+  <meta name="description" content="Chapter 9  | Hyaluronic Acid Forecasting" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9  | Hyaluronic Acid Forecasting" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9  | Hyaluronic Acid Forecasting" />
+  
+  
+  
+
+<meta name="author" content="Mary Grace Stachnik" />
+
+
+<meta name="date" content="2025-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-analysis-and-cleaning-1.html"/>
+<link rel="next" href="r-setup-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SLForecast</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Executive Summary</a></li>
+<li class="chapter" data-level="2" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html"><i class="fa fa-check"></i><b>2</b> Data Analysis and Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#r-setup"><i class="fa fa-check"></i><b>2.1</b> R Setup</a></li>
+<li class="chapter" data-level="2.2" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#data-cleaning"><i class="fa fa-check"></i><b>2.2</b> Data Cleaning</a></li>
+<li class="chapter" data-level="2.3" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#data-aggregations"><i class="fa fa-check"></i><b>2.3</b> Data Aggregations</a></li>
+<li class="chapter" data-level="2.4" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#time-series-decomposition"><i class="fa fa-check"></i><b>2.4</b> Time Series Decomposition</a></li>
+<li class="chapter" data-level="2.5" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#differencing"><i class="fa fa-check"></i><b>2.5</b> Differencing</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>3</b> —</a></li>
+<li class="chapter" data-level="4" data-path="title-hyaluronic-acid-forecasting.html"><a href="title-hyaluronic-acid-forecasting.html"><i class="fa fa-check"></i><b>4</b> title: “Hyaluronic Acid Forecasting”</a></li>
+<li class="chapter" data-level="5" data-path="output-html_document.html"><a href="output-html_document.html"><i class="fa fa-check"></i><b>5</b> output: html_document</a></li>
+<li class="chapter" data-level="6" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>6</b> —</a></li>
+<li class="chapter" data-level="7" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>7</b> </a></li>
+<li class="chapter" data-level="8" data-path="data-analysis-and-cleaning-1.html"><a href="data-analysis-and-cleaning-1.html"><i class="fa fa-check"></i><b>8</b> # Data Analysis and Cleaning</a></li>
+<li class="chapter" data-level="9" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>9</b> </a></li>
+<li class="chapter" data-level="10" data-path="r-setup-1.html"><a href="r-setup-1.html"><i class="fa fa-check"></i><b>10</b> ## R Setup</a></li>
+<li class="chapter" data-level="11" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>11</b> </a></li>
+<li class="chapter" data-level="12" data-path="i-loaded-in-relevant-libraries-and-imported-the-sales-and-promotional-datasets..html"><a href="i-loaded-in-relevant-libraries-and-imported-the-sales-and-promotional-datasets..html"><i class="fa fa-check"></i><b>12</b> I loaded in relevant libraries and imported the sales and promotional datasets.</a></li>
+<li class="chapter" data-level="13" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>13</b> </a></li>
+<li class="chapter" data-level="14" data-path="r-execsummary-includetrue-load-libraries-libraryggplot2-librarytidyverse-librarydplyr-libraryfpp3-libraryfable-libraryfabletools-librarylubridate-libraryimputets-libraryforecast-libraryfable.prophet-read-in-data-setwdcusersmary-grace-stachnikonedrivedesktopiaaskin-laundryskinlaundry_forecasting-sales---read.csv2022-2024-clinic-product-sales-data.csv-promotions---read.csvpromotion-details-and-dates.html"><a href="r-execsummary-includetrue-load-libraries-libraryggplot2-librarytidyverse-librarydplyr-libraryfpp3-libraryfable-libraryfabletools-librarylubridate-libraryimputets-libraryforecast-libraryfable.prophet-read-in-data-setwdcusersmary-grace-stachnikonedrivedesktopiaaskin-laundryskinlaundry_forecasting-sales---read.csv2022-2024-clinic-product-sales-data.csv-promotions---read.csvpromotion-details-and-dates.html"><i class="fa fa-check"></i><b>14</b> <code>{r ExecSummary, include=TRUE} # # Load libraries # library(ggplot2) # library(tidyverse) # library(dplyr) # library(fpp3) # library(fable) # library(fabletools) # library(lubridate) # library(imputeTS) # library(forecast) # library(fable.prophet) #  # # Read in data # setwd('C:/Users/Mary Grace Stachnik/OneDrive/Desktop/IAA/Skin Laundry/SkinLaundry_Forecasting') # sales &lt;- read.csv('2022-2024 Clinic Product Sales Data.csv') # promotions &lt;- read.csv('Promotion details and dates.csv') #  #</code></a></li>
+<li class="chapter" data-level="15" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>15</b> </a></li>
+<li class="chapter" data-level="16" data-path="data-cleaning-1.html"><a href="data-cleaning-1.html"><i class="fa fa-check"></i><b>16</b> ## Data Cleaning</a></li>
+<li class="chapter" data-level="17" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>17</b> </a></li>
+<li class="chapter" data-level="18" data-path="i-converted-all-date-columns-from-character-to-date-types-extracted-the-quarter-of-each-observation-and-calculated-the-number-of-promotional-sales-days-in-each-quarter..html"><a href="i-converted-all-date-columns-from-character-to-date-types-extracted-the-quarter-of-each-observation-and-calculated-the-number-of-promotional-sales-days-in-each-quarter..html"><i class="fa fa-check"></i><b>18</b> I converted all date columns from character to date types, extracted the Quarter of each observation, and calculated the number of promotional sales days in each quarter.</a></li>
+<li class="chapter" data-level="19" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>19</b> </a></li>
+<li class="chapter" data-level="20" data-path="assumption-if-a-promotion-spans-across-2-months-it-is-counted-in-the-quarter-of-the-end-month..html"><a href="assumption-if-a-promotion-spans-across-2-months-it-is-counted-in-the-quarter-of-the-end-month..html"><i class="fa fa-check"></i><b>20</b> <strong>Assumption: If a promotion spans across 2 months, it is counted in the quarter of the end month.</strong></a></li>
+<li class="chapter" data-level="21" data-path="section-9.html"><a href="section-9.html"><i class="fa fa-check"></i><b>21</b> </a></li>
+<li class="chapter" data-level="22" data-path="r-datasets-includetrue-convert-sales-date-column-from-character-to-date-format-and-extract-month-and-year-salessale.date---as.posixctsalessale.date-format-mdy-salessale.month---yearmonthsalessale.date-salessale.qtr---yearquartersalessale.date-salessale.dummyqtr---as.factorquartersalessale.date-convert-promotion-date-columns-from-character-to-date-format-and-extract-month-and-year-promotionsstart.date---as.posixctpromotionsstart.date-format-mdy-promotionsend.date---as.posixctpromotionsend.date-format-mdy-promotionsstart.month---yearmonthpromotionsstart.date-promotionsend.month---yearmonthpromotionsend.date-calculate-the-length-of-each-promotion-in-days.-promotionspromotion.qtr---yearquarterpromotionsend.date-promotionspromotion.days---roundas.numericpromotionsend.date---promotionsstart.html"><a href="r-datasets-includetrue-convert-sales-date-column-from-character-to-date-format-and-extract-month-and-year-salessale.date---as.posixctsalessale.date-format-mdy-salessale.month---yearmonthsalessale.date-salessale.qtr---yearquartersalessale.date-salessale.dummyqtr---as.factorquartersalessale.date-convert-promotion-date-columns-from-character-to-date-format-and-extract-month-and-year-promotionsstart.date---as.posixctpromotionsstart.date-format-mdy-promotionsend.date---as.posixctpromotionsend.date-format-mdy-promotionsstart.month---yearmonthpromotionsstart.date-promotionsend.month---yearmonthpromotionsend.date-calculate-the-length-of-each-promotion-in-days.-promotionspromotion.qtr---yearquarterpromotionsend.date-promotionspromotion.days---roundas.numericpromotionsend.date---promotionsstart.html"><i class="fa fa-check"></i><b>22</b> <code>{r Datasets, include=TRUE} # # Convert sales date column from character to date format and extract Month and Year # sales$sale.date &lt;- as.POSIXct(sales$sale.date, format = "%m/%d/%Y") # sales$sale.month &lt;- yearmonth(sales$sale.date) # sales$sale.qtr &lt;- yearquarter(sales$sale.date) # sales$sale.dummyqtr &lt;- as.factor(quarter(sales$sale.date)) #  # # Convert promotion date columns from character to date format and extract Month and Year # promotions$Start.Date &lt;- as.POSIXct(promotions$Start.Date, format = "%m/%d/%Y") # promotions$End.Date &lt;- as.POSIXct(promotions$End.Date, format = "%m/%d/%Y") # promotions$Start.Month &lt;- yearmonth(promotions$Start.Date) # promotions$End.Month &lt;- yearmonth(promotions$End.Date) #  # # Calculate the length of each promotion in days. # promotions$promotion.qtr &lt;- yearquarter(promotions$End.Date) # promotions$promotion.days &lt;- round(as.numeric(promotions$End.Date - promotions$Start.Date),0) #</code></a></li>
+<li class="chapter" data-level="23" data-path="section-10.html"><a href="section-10.html"><i class="fa fa-check"></i><b>23</b> </a></li>
+<li class="chapter" data-level="24" data-path="data-aggregations-1.html"><a href="data-aggregations-1.html"><i class="fa fa-check"></i><b>24</b> ## Data Aggregations</a></li>
+<li class="chapter" data-level="25" data-path="section-11.html"><a href="section-11.html"><i class="fa fa-check"></i><b>25</b> </a></li>
+<li class="chapter" data-level="26" data-path="i-aggregated-all-data-to-the-quarteryear-level-and-summed-the-total-sales-and-total-promotional-days.-i-joined-the-sales-and-promotional-datasets..html"><a href="i-aggregated-all-data-to-the-quarteryear-level-and-summed-the-total-sales-and-total-promotional-days.-i-joined-the-sales-and-promotional-datasets..html"><i class="fa fa-check"></i><b>26</b> I aggregated all data to the Quarter/Year level and summed the total sales and total promotional days. I joined the sales and promotional datasets.</a></li>
+<li class="chapter" data-level="27" data-path="section-12.html"><a href="section-12.html"><i class="fa fa-check"></i><b>27</b> </a></li>
+<li class="chapter" data-level="28" data-path="r-aggregations-includetrue-calculate-total-number-of-days-a-promotion-is-running-during-each-quarter-promotion.agg---suppressmessagespromotions-group_bypromotion.qtr-summarizepromotion.days-sumpromotion.days-ungroup-filter-to-hyaluronic-acid-at-clinic-g-for-jan-2022-to-sep-2024-and-group-sales-by-month-gha---suppressmessagessales-filterclinic.nameclinic-g-product.namehyaluronic-acid-serum-sale.date-as.posixct1012024-format-mdy-group_bysale.qtr-sale.dummyqtr-summarizetotal_hyaluronic-sumquantity.sold-ungroup-join-promotion-details-onto-dataset-modeling-assumption-sales-for-q3-2024-are-pre-planned-gha---left_joingha-promotion.agg-by-csale.qtr-promotion.qtr-gha.html"><a href="r-aggregations-includetrue-calculate-total-number-of-days-a-promotion-is-running-during-each-quarter-promotion.agg---suppressmessagespromotions-group_bypromotion.qtr-summarizepromotion.days-sumpromotion.days-ungroup-filter-to-hyaluronic-acid-at-clinic-g-for-jan-2022-to-sep-2024-and-group-sales-by-month-gha---suppressmessagessales-filterclinic.nameclinic-g-product.namehyaluronic-acid-serum-sale.date-as.posixct1012024-format-mdy-group_bysale.qtr-sale.dummyqtr-summarizetotal_hyaluronic-sumquantity.sold-ungroup-join-promotion-details-onto-dataset-modeling-assumption-sales-for-q3-2024-are-pre-planned-gha---left_joingha-promotion.agg-by-csale.qtr-promotion.qtr-gha.html"><i class="fa fa-check"></i><b>28</b> <code>{r Aggregations, include=TRUE} # # Calculate total number of days a promotion is running during each quarter # promotion.agg &lt;- suppressMessages(promotions %&gt;% group_by(promotion.qtr) %&gt;%  #   summarize(promotion.days = sum(promotion.days)) %&gt;%  #   ungroup()) #  # # Filter to Hyaluronic Acid at Clinic G for Jan 2022 to Sep 2024 and group sales by month # gha &lt;- suppressMessages(sales %&gt;% filter(clinic.name=="Clinic G" &amp;  #                           product.name=="Hyaluronic Acid Serum" &amp; #                           sale.date &lt; as.POSIXct('10/1/2024', format = "%m/%d/%Y")) %&gt;%  #   group_by(sale.qtr, sale.dummyqtr) %&gt;% summarize(total_hyaluronic = sum(quantity.sold)) %&gt;%  #   ungroup()) #  # # Join promotion details onto dataset # # Modeling Assumption: Sales for Q3 2024 are pre-planned # gha &lt;- left_join(gha, promotion.agg, by = c("sale.qtr" = "promotion.qtr")) # gha #</code></a></li>
+<li class="chapter" data-level="29" data-path="section-13.html"><a href="section-13.html"><i class="fa fa-check"></i><b>29</b> </a></li>
+<li class="chapter" data-level="30" data-path="time-series-decomposition-1.html"><a href="time-series-decomposition-1.html"><i class="fa fa-check"></i><b>30</b> ## Time Series Decomposition</a></li>
+<li class="chapter" data-level="31" data-path="section-14.html"><a href="section-14.html"><i class="fa fa-check"></i><b>31</b> </a></li>
+<li class="chapter" data-level="32" data-path="i-converted-the-series-to-a-time-series-object-split-into-train-validation-and-test-datasets-and-checked-that-there-were-no-implicit-or-explicit-missing-time-periods..html"><a href="i-converted-the-series-to-a-time-series-object-split-into-train-validation-and-test-datasets-and-checked-that-there-were-no-implicit-or-explicit-missing-time-periods..html"><i class="fa fa-check"></i><b>32</b> I converted the series to a time series object, split into train, validation, and test datasets, and checked that there were no implicit or explicit missing time periods.</a></li>
+<li class="chapter" data-level="33" data-path="section-15.html"><a href="section-15.html"><i class="fa fa-check"></i><b>33</b> </a></li>
+<li class="chapter" data-level="34" data-path="i-visualized-the-data-using-stl-time-series-decomposition.-the-insights-gained-from-visualization-include-an-increasing-trend-starting-in-the-middle-of-2023-seasonal-spikes-in-april-and-november-and-what-seems-to-be-an-outlier-value-or-the-start-of-a-new-increased-trend-in-sales-in-q2-of-2024..html"><a href="i-visualized-the-data-using-stl-time-series-decomposition.-the-insights-gained-from-visualization-include-an-increasing-trend-starting-in-the-middle-of-2023-seasonal-spikes-in-april-and-november-and-what-seems-to-be-an-outlier-value-or-the-start-of-a-new-increased-trend-in-sales-in-q2-of-2024..html"><i class="fa fa-check"></i><b>34</b> I visualized the data using STL time series decomposition. The insights gained from visualization include an increasing trend starting in the middle of 2023, seasonal spikes in April and November, and what seems to be an outlier value or the start of a new increased trend in sales in Q2 of 2024.</a></li>
+<li class="chapter" data-level="35" data-path="section-16.html"><a href="section-16.html"><i class="fa fa-check"></i><b>35</b> </a></li>
+<li class="chapter" data-level="36" data-path="r-decomp-includetrue-convert-series-into-a-tsibble-for-time-series-analysis-ha_ts---as_tsibblegha-indexsale.qtr-create-training-validation-and-test-datasets-20222023-as-training-q1q2-2024-as-validation-q3-2024-as-test-train---ha_ts18-val---ha_ts910-train_val---dplyrbind_rowstrainval-test---ha_ts11-determine-if-there-are-implicit-or-explicit-time-gaps-in-data-count_gapsha_ts-scan_gapsha_ts-perform-stl-decomposition-to-visualize-trainingvalidation-data-as-well-as-trend-and-seasonal-patterns-dcmp---train_val-modelstl-stltotal_hyaluronic-componentsdcmp-autoplot-theme_classic.html"><a href="r-decomp-includetrue-convert-series-into-a-tsibble-for-time-series-analysis-ha_ts---as_tsibblegha-indexsale.qtr-create-training-validation-and-test-datasets-20222023-as-training-q1q2-2024-as-validation-q3-2024-as-test-train---ha_ts18-val---ha_ts910-train_val---dplyrbind_rowstrainval-test---ha_ts11-determine-if-there-are-implicit-or-explicit-time-gaps-in-data-count_gapsha_ts-scan_gapsha_ts-perform-stl-decomposition-to-visualize-trainingvalidation-data-as-well-as-trend-and-seasonal-patterns-dcmp---train_val-modelstl-stltotal_hyaluronic-componentsdcmp-autoplot-theme_classic.html"><i class="fa fa-check"></i><b>36</b> <code>{r Decomp, include=TRUE} # #Convert series into a tsibble for time series analysis # ha_ts &lt;- as_tsibble(gha, index=sale.qtr) #  # # Create training, validation, and test datasets # # 2022/2023 as training, Q1/Q2 2024 as validation, Q3 2024 as test # train &lt;- ha_ts[1:8,] # val &lt;- ha_ts[9:10,] # train_val &lt;- dplyr::bind_rows(train,val) # test &lt;- ha_ts[11,] #  # # Determine if there are implicit or explicit time gaps in data  # #count_gaps(ha_ts) # #scan_gaps(ha_ts) #  # # Perform STL decomposition to visualize training/validation data, as well as trend and seasonal patterns # dcmp &lt;- train_val %&gt;% model(stl = STL(total_hyaluronic)) # components(dcmp) %&gt;% autoplot() + theme_classic() #</code></a></li>
+<li class="chapter" data-level="37" data-path="section-17.html"><a href="section-17.html"><i class="fa fa-check"></i><b>37</b> </a></li>
+<li class="chapter" data-level="38" data-path="differencing-1.html"><a href="differencing-1.html"><i class="fa fa-check"></i><b>38</b> ## Differencing</a></li>
+<li class="chapter" data-level="39" data-path="section-18.html"><a href="section-18.html"><i class="fa fa-check"></i><b>39</b> </a></li>
+<li class="chapter" data-level="40" data-path="r-diff-includetrue-determine-optimal-number-of-seasonal-differences-assuming-monthly-season-printtrain-featurestotal_hyaluronic-unitroot_nsdiffs-1-determine-if-non-seasonal-differences-are-needed-after-taking-the-1st-seasonal-difference-printtrain-mutateha_diff-differencetotal_hyaluronic-lag4-featuresha_diff-unitroot_ndiffs-0.html"><a href="r-diff-includetrue-determine-optimal-number-of-seasonal-differences-assuming-monthly-season-printtrain-featurestotal_hyaluronic-unitroot_nsdiffs-1-determine-if-non-seasonal-differences-are-needed-after-taking-the-1st-seasonal-difference-printtrain-mutateha_diff-differencetotal_hyaluronic-lag4-featuresha_diff-unitroot_ndiffs-0.html"><i class="fa fa-check"></i><b>40</b> <code>{r Diff, include=TRUE} # # Determine optimal number of seasonal differences, assuming monthly season # print(train %&gt;% features(total_hyaluronic, unitroot_nsdiffs)) #1 #  # # # Determine if non-seasonal differences are needed after taking the 1st seasonal difference # print(train %&gt;% mutate(ha_diff = difference(total_hyaluronic, lag=4)) %&gt;% #   features(ha_diff, unitroot_ndiffs)) #0 #</code></a></li>
+<li class="chapter" data-level="41" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>41</b> The pool of tears</a></li>
+<li class="chapter" data-level="42" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>42</b> A caucus-race and a long tale</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hyaluronic Acid Forecasting</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-3" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> </h1>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-analysis-and-cleaning-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-setup-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mgstachn/SkinLaundry_Forecasting/edit/main/01-Executive_Summary.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/mgstachn/SkinLaundry_Forecasting/blob/main/01-Executive_Summary.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

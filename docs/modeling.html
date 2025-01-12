@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Modeling | Hyaluronic Acid Forecasting</title>
+  <meta name="description" content="Chapter 3 Modeling | Hyaluronic Acid Forecasting" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Modeling | Hyaluronic Acid Forecasting" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Modeling | Hyaluronic Acid Forecasting" />
+  
+  
+  
+
+<meta name="author" content="Mary Grace Stachnik" />
+
+
+<meta name="date" content="2025-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-analysis-and-cleaning.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SLForecast</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#business-summary"><i class="fa fa-check"></i><b>1.1</b> Business Summary</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#technical-executive-summary"><i class="fa fa-check"></i><b>1.2</b> Technical Executive Summary</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3</b> Next Steps</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html"><i class="fa fa-check"></i><b>2</b> Data Analysis and Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#r-setup"><i class="fa fa-check"></i><b>2.1</b> R Setup</a></li>
+<li class="chapter" data-level="2.2" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#data-cleaning"><i class="fa fa-check"></i><b>2.2</b> Data Cleaning</a></li>
+<li class="chapter" data-level="2.3" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#data-aggregations"><i class="fa fa-check"></i><b>2.3</b> Data Aggregations</a></li>
+<li class="chapter" data-level="2.4" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#time-series-decomposition"><i class="fa fa-check"></i><b>2.4</b> Time Series Decomposition</a></li>
+<li class="chapter" data-level="2.5" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#differencing"><i class="fa fa-check"></i><b>2.5</b> Differencing</a></li>
+<li class="chapter" data-level="2.6" data-path="data-analysis-and-cleaning.html"><a href="data-analysis-and-cleaning.html#acf-and-pacf-plots"><i class="fa fa-check"></i><b>2.6</b> ACF and PACF Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>3</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modeling.html"><a href="modeling.html#exponential-smoothing-model"><i class="fa fa-check"></i><b>3.1</b> Exponential Smoothing Model</a></li>
+<li class="chapter" data-level="3.2" data-path="modeling.html"><a href="modeling.html#arimax-model"><i class="fa fa-check"></i><b>3.2</b> ARIMAX Model</a></li>
+<li class="chapter" data-level="3.3" data-path="modeling.html"><a href="modeling.html#prophet-model"><i class="fa fa-check"></i><b>3.3</b> Prophet Model</a></li>
+<li class="chapter" data-level="3.4" data-path="modeling.html"><a href="modeling.html#combined-models"><i class="fa fa-check"></i><b>3.4</b> Combined Models</a></li>
+<li class="chapter" data-level="3.5" data-path="modeling.html"><a href="modeling.html#final-forecast-accuracy"><i class="fa fa-check"></i><b>3.5</b> Final Forecast Accuracy</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hyaluronic Acid Forecasting</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modeling" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Modeling<a href="modeling.html#modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="exponential-smoothing-model" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Exponential Smoothing Model<a href="modeling.html#exponential-smoothing-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I used the autoETS() function to determine the optimal exponential smoothing model for the training data. My final ESM model had a multiplicative error term and no seasonal or trend terms. The model forecast 130 units of Hyaluronic Acid for both Q1 and Q2 2024 within the validation set, which corresponds to a MAPE of 55.2% The Ljung-Box test showed no remaining autocorrelation.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modeling.html#cb16-1" tabindex="-1"></a><span class="co"># Train ESM model using the autoETS() function</span></span>
+<span id="cb16-2"><a href="modeling.html#cb16-2" tabindex="-1"></a>model_ETS <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="modeling.html#cb16-3" tabindex="-1"></a>  <span class="fu">model</span>(</span>
+<span id="cb16-4"><a href="modeling.html#cb16-4" tabindex="-1"></a>    <span class="at">autoETS =</span> <span class="fu">ETS</span>(total_hyaluronic)</span>
+<span id="cb16-5"><a href="modeling.html#cb16-5" tabindex="-1"></a>  )</span>
+<span id="cb16-6"><a href="modeling.html#cb16-6" tabindex="-1"></a>model_ETS</span></code></pre></div>
+<pre><code>## # A mable: 1 x 1
+##        autoETS
+##        &lt;model&gt;
+## 1 &lt;ETS(M,N,N)&gt;</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="modeling.html#cb18-1" tabindex="-1"></a><span class="co"># Create a forecast for the validation set</span></span>
+<span id="cb18-2"><a href="modeling.html#cb18-2" tabindex="-1"></a>model_ETS_for <span class="ot">&lt;-</span> fabletools<span class="sc">::</span><span class="fu">forecast</span>(model_ETS, val)</span>
+<span id="cb18-3"><a href="modeling.html#cb18-3" tabindex="-1"></a>model_ETS_for</span></code></pre></div>
+<pre><code>## # A fable: 2 x 6 [1Q]
+## # Key:     .model [1]
+##   .model  sale.qtr total_hyaluronic .mean sale.dummyqtr promotion.days
+##   &lt;chr&gt;      &lt;qtr&gt;           &lt;dist&gt; &lt;dbl&gt; &lt;fct&gt;                  &lt;dbl&gt;
+## 1 autoETS  2024 Q1      N(130, 321)  130. 1                         20
+## 2 autoETS  2024 Q2      N(130, 473)  130. 2                         21</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modeling.html#cb20-1" tabindex="-1"></a><span class="co"># Calculate accuracy for the ESM model on the validation set</span></span>
+<span id="cb20-2"><a href="modeling.html#cb20-2" tabindex="-1"></a>fabletools<span class="sc">::</span><span class="fu">accuracy</span>(model_ETS_for, val)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 10
+##   .model  .type    ME  RMSE   MAE   MPE  MAPE  MASE RMSSE  ACF1
+##   &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 autoETS Test   24.5  80.3  76.5 -11.4  55.2   NaN   NaN  -0.5</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="modeling.html#cb22-1" tabindex="-1"></a><span class="co"># Check for any remaining autocorrelation using the ljung_box test</span></span>
+<span id="cb22-2"><a href="modeling.html#cb22-2" tabindex="-1"></a><span class="fu">augment</span>(model_ETS) <span class="sc">%&gt;%</span> <span class="fu">features</span>(.innov,ljung_box, <span class="at">lag=</span><span class="dv">4</span>) <span class="co"># FTR, no autocorrelation</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   .model  lb_stat lb_pvalue
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 autoETS    1.31     0.859</code></pre>
+</div>
+<div id="arimax-model" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> ARIMAX Model<a href="modeling.html#arimax-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I used the auto ARIMA() function to determine the optimal ARIMAX mdoel for the training data. My final ARIMA model had (p,d,q,)(P,D,Q) terms of (0,0,0)(0,0,0). Seasonality was accounted for through quarterly dummy variables, and dynamic regression was used for the number of days within each quarter when a promotion was running. The model forecast 50 units of Hyaluronic Acid Q1 2024 and 137 units for Q2 2024 within the validation set, which corresponds to a MAPE of 38.1% The Ljung-Box test showed no remaining autocorrelation.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="modeling.html#cb24-1" tabindex="-1"></a><span class="co"># Train ARIMA Model using the auto ARIMA function, using dummy variables instead of seasonal terms</span></span>
+<span id="cb24-2"><a href="modeling.html#cb24-2" tabindex="-1"></a>model_SARIMAX <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="modeling.html#cb24-3" tabindex="-1"></a>  <span class="fu">model</span>(</span>
+<span id="cb24-4"><a href="modeling.html#cb24-4" tabindex="-1"></a>    <span class="at">autoARIMA=</span><span class="fu">ARIMA</span>(total_hyaluronic <span class="sc">~</span> sale.dummyqtr <span class="sc">+</span> promotion.days))</span>
+<span id="cb24-5"><a href="modeling.html#cb24-5" tabindex="-1"></a>model_SARIMAX</span></code></pre></div>
+<pre><code>## # A mable: 1 x 1
+##                     autoARIMA
+##                       &lt;model&gt;
+## 1 &lt;LM w/ ARIMA(0,0,0) errors&gt;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="modeling.html#cb26-1" tabindex="-1"></a><span class="co"># Create a forecast for the validation set</span></span>
+<span id="cb26-2"><a href="modeling.html#cb26-2" tabindex="-1"></a>model_SARIMAX_for <span class="ot">&lt;-</span> <span class="fu">forecast</span>(model_SARIMAX, val)</span>
+<span id="cb26-3"><a href="modeling.html#cb26-3" tabindex="-1"></a>model_SARIMAX_for</span></code></pre></div>
+<pre><code>## # A fable: 2 x 6 [1Q]
+## # Key:     .model [1]
+##   .model    sale.qtr total_hyaluronic .mean sale.dummyqtr promotion.days
+##   &lt;chr&gt;        &lt;qtr&gt;           &lt;dist&gt; &lt;dbl&gt; &lt;fct&gt;                  &lt;dbl&gt;
+## 1 autoARIMA  2024 Q1      N(50, 1414)  50.3 1                         20
+## 2 autoARIMA  2024 Q2     N(137, 1414) 137.  2                         21</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="modeling.html#cb28-1" tabindex="-1"></a><span class="co"># Calculate accuracy for the ARIMAX model on the validation set</span></span>
+<span id="cb28-2"><a href="modeling.html#cb28-2" tabindex="-1"></a>fabletools<span class="sc">::</span><span class="fu">accuracy</span>(model_SARIMAX_for, val)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 10
+##   .model    .type    ME  RMSE   MAE   MPE  MAPE  MASE RMSSE  ACF1
+##   &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 autoARIMA Test   60.8  69.2  60.8  38.1  38.1   NaN   NaN  -0.5</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="modeling.html#cb30-1" tabindex="-1"></a><span class="co"># Check for any remaining autocorrelation using the ljung_box test</span></span>
+<span id="cb30-2"><a href="modeling.html#cb30-2" tabindex="-1"></a><span class="fu">augment</span>(model_SARIMAX) <span class="sc">%&gt;%</span> <span class="fu">features</span>(.innov, ljung_box, <span class="at">lag=</span><span class="dv">4</span>) <span class="co"># FTR, no autocorrelation</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   .model    lb_stat lb_pvalue
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1 autoARIMA    2.82     0.588</code></pre>
+</div>
+<div id="prophet-model" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Prophet Model<a href="modeling.html#prophet-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I used the Prophet() function to determine the optimal Prophet for the training data. My final Prophet model had linear growth and multiplicative yearly seasonality, and a regressor variable was used for the number of days within each quarter when a promotion was running. The model forecast 92 units of Hyaluronic Acid Q1 2024 and 219 units for Q2 2024 within the validation set, which corresponds to a MAPE of 11.9% This was our lowest MAPE on the validation set, so it was chosen as the final model. The Ljung-Box test showed no remaining autocorrelation.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modeling.html#cb32-1" tabindex="-1"></a><span class="co"># Train Prophet Model, using a regressor variable for promotional days</span></span>
+<span id="cb32-2"><a href="modeling.html#cb32-2" tabindex="-1"></a>model_prophet_test <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="modeling.html#cb32-3" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">prophet1 =</span> <span class="fu">prophet</span>(total_hyaluronic <span class="sc">~</span> promotion.days <span class="sc">+</span> <span class="fu">growth</span>(<span class="st">&quot;linear&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="at">period =</span> <span class="st">&quot;year&quot;</span>, <span class="at">type=</span><span class="st">&quot;multiplicative&quot;</span>)),</span>
+<span id="cb32-4"><a href="modeling.html#cb32-4" tabindex="-1"></a>        <span class="at">prophet2 =</span> <span class="fu">prophet</span>(total_hyaluronic <span class="sc">~</span> promotion.days <span class="sc">+</span> <span class="fu">growth</span>(<span class="st">&quot;linear&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="at">period =</span> <span class="st">&quot;year&quot;</span>, <span class="at">type=</span><span class="st">&quot;additive&quot;</span>))</span>
+<span id="cb32-5"><a href="modeling.html#cb32-5" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## n.changepoints greater than number of observations. Using 5
+## n.changepoints greater than number of observations. Using 5</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="modeling.html#cb34-1" tabindex="-1"></a>model_prophet <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="modeling.html#cb34-2" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">prophet1 =</span> <span class="fu">prophet</span>(total_hyaluronic <span class="sc">~</span> <span class="fu">xreg</span>(promotion.days) <span class="sc">+</span> <span class="fu">growth</span>(<span class="st">&quot;linear&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="at">period =</span> <span class="st">&quot;year&quot;</span>, <span class="at">type=</span><span class="st">&quot;multiplicative&quot;</span>)))</span></code></pre></div>
+<pre><code>## n.changepoints greater than number of observations. Using 5</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="modeling.html#cb36-1" tabindex="-1"></a><span class="co"># Create a forecast for the validation set</span></span>
+<span id="cb36-2"><a href="modeling.html#cb36-2" tabindex="-1"></a>model_prophet_for <span class="ot">&lt;-</span> fabletools<span class="sc">::</span><span class="fu">forecast</span>(model_prophet, val)</span>
+<span id="cb36-3"><a href="modeling.html#cb36-3" tabindex="-1"></a>model_prophet_for</span></code></pre></div>
+<pre><code>## # A fable: 2 x 6 [1Q]
+## # Key:     .model [1]
+##   .model   sale.qtr total_hyaluronic .mean sale.dummyqtr promotion.days
+##   &lt;chr&gt;       &lt;qtr&gt;           &lt;dist&gt; &lt;dbl&gt; &lt;fct&gt;                  &lt;dbl&gt;
+## 1 prophet1  2024 Q1     sample[5000]  92.5 1                         20
+## 2 prophet1  2024 Q2     sample[5000] 219.  2                         21</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="modeling.html#cb38-1" tabindex="-1"></a><span class="co"># Calculate accuracy for the Prophet model on the validation set</span></span>
+<span id="cb38-2"><a href="modeling.html#cb38-2" tabindex="-1"></a>fabletools<span class="sc">::</span><span class="fu">accuracy</span>(model_prophet_for, val) </span></code></pre></div>
+<pre><code>## # A tibble: 1 × 10
+##   .model   .type    ME  RMSE   MAE   MPE  MAPE  MASE RMSSE  ACF1
+##   &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 prophet1 Test  -1.20  13.3  13.3 -6.67  11.9   NaN   NaN  -0.5</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modeling.html#cb40-1" tabindex="-1"></a><span class="co"># Check for any remaining autocorrelation using the ljung_box test</span></span>
+<span id="cb40-2"><a href="modeling.html#cb40-2" tabindex="-1"></a><span class="fu">augment</span>(model_prophet) <span class="sc">%&gt;%</span> <span class="fu">features</span>(.innov, ljung_box, <span class="at">lag=</span><span class="dv">4</span>) <span class="co"># FTR, no autocorrelation</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   .model   lb_stat lb_pvalue
+##   &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1 prophet1    5.81     0.214</code></pre>
+</div>
+<div id="combined-models" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Combined Models<a href="modeling.html#combined-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I combined all three models, as well as ESM+Prophet and ARIMAX+Prophet. The accuracy on the combined models was lower than the Prophet on its own, so combinations were not used as the final model.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modeling.html#cb42-1" tabindex="-1"></a><span class="co"># Combined Models</span></span>
+<span id="cb42-2"><a href="modeling.html#cb42-2" tabindex="-1"></a>model_all <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="modeling.html#cb42-3" tabindex="-1"></a>  <span class="fu">model</span>(</span>
+<span id="cb42-4"><a href="modeling.html#cb42-4" tabindex="-1"></a>    <span class="at">esm =</span> <span class="fu">ETS</span>(total_hyaluronic),</span>
+<span id="cb42-5"><a href="modeling.html#cb42-5" tabindex="-1"></a>    <span class="at">arimax =</span> <span class="fu">ARIMA</span>(total_hyaluronic <span class="sc">~</span> sale.dummyqtr <span class="sc">+</span> promotion.days),</span>
+<span id="cb42-6"><a href="modeling.html#cb42-6" tabindex="-1"></a>    <span class="at">prophet =</span> <span class="fu">prophet</span>(total_hyaluronic <span class="sc">~</span> <span class="fu">xreg</span>(promotion.days) <span class="sc">+</span> <span class="fu">growth</span>(<span class="st">&quot;linear&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-7"><a href="modeling.html#cb42-7" tabindex="-1"></a>                        <span class="fu">season</span>(<span class="at">period =</span> <span class="st">&quot;year&quot;</span>, <span class="at">type=</span><span class="st">&quot;multiplicative&quot;</span>))</span>
+<span id="cb42-8"><a href="modeling.html#cb42-8" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-9"><a href="modeling.html#cb42-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">combo =</span> (esm<span class="sc">+</span>arimax<span class="sc">+</span>prophet)<span class="sc">/</span><span class="dv">3</span>,</span>
+<span id="cb42-10"><a href="modeling.html#cb42-10" tabindex="-1"></a>         <span class="at">combo2 =</span> (esm<span class="sc">+</span>prophet)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb42-11"><a href="modeling.html#cb42-11" tabindex="-1"></a>         <span class="at">combo3 =</span> (arimax<span class="sc">+</span>prophet)<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## n.changepoints greater than number of observations. Using 5</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modeling.html#cb44-1" tabindex="-1"></a>model_all</span></code></pre></div>
+<pre><code>## # A mable: 1 x 6
+##            esm                      arimax   prophet         combo        combo2        combo3
+##        &lt;model&gt;                     &lt;model&gt;   &lt;model&gt;       &lt;model&gt;       &lt;model&gt;       &lt;model&gt;
+## 1 &lt;ETS(M,N,N)&gt; &lt;LM w/ ARIMA(0,0,0) errors&gt; &lt;prophet&gt; &lt;COMBINATION&gt; &lt;COMBINATION&gt; &lt;COMBINATION&gt;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modeling.html#cb46-1" tabindex="-1"></a><span class="co"># Create a forecast for the validation set</span></span>
+<span id="cb46-2"><a href="modeling.html#cb46-2" tabindex="-1"></a>model_all_for <span class="ot">&lt;-</span> fabletools<span class="sc">::</span><span class="fu">forecast</span>(model_all, val)</span>
+<span id="cb46-3"><a href="modeling.html#cb46-3" tabindex="-1"></a>model_all_for</span></code></pre></div>
+<pre><code>## # A fable: 12 x 6 [1Q]
+## # Key:     .model [6]
+##    .model  sale.qtr total_hyaluronic .mean sale.dummyqtr promotion.days
+##    &lt;chr&gt;      &lt;qtr&gt;           &lt;dist&gt; &lt;dbl&gt; &lt;fct&gt;                  &lt;dbl&gt;
+##  1 esm      2024 Q1      N(130, 321) 130.  1                         20
+##  2 esm      2024 Q2      N(130, 473) 130.  2                         21
+##  3 arimax   2024 Q1      N(50, 1414)  50.3 1                         20
+##  4 arimax   2024 Q2     N(137, 1414) 137.  2                         21
+##  5 prophet  2024 Q1     sample[5000]  92.5 1                         20
+##  6 prophet  2024 Q2     sample[5000] 219.  2                         21
+##  7 combo    2024 Q1         90.90699  90.9 1                         20
+##  8 combo    2024 Q2         162.0223 162.  2                         21
+##  9 combo2   2024 Q1         111.2171 111.  1                         20
+## 10 combo2   2024 Q2         174.4336 174.  2                         21
+## 11 combo3   2024 Q1         71.38409  71.4 1                         20
+## 12 combo3   2024 Q2         178.0584 178.  2                         21</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modeling.html#cb48-1" tabindex="-1"></a><span class="co"># Calculate accuracy for the combined models on the validation set</span></span>
+<span id="cb48-2"><a href="modeling.html#cb48-2" tabindex="-1"></a>fabletools<span class="sc">::</span><span class="fu">accuracy</span>(model_all_for, val)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
+##   .model  .type    ME  RMSE   MAE    MPE  MAPE  MASE RMSSE  ACF1
+##   &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 arimax  Test  60.8   69.2  60.8  38.1   38.1   NaN   NaN  -0.5
+## 2 combo   Test  28.0   49.6  40.9   6.66  23.2   NaN   NaN  -0.5
+## 3 combo2  Test  11.7   46.4  44.9  -9.05  33.5   NaN   NaN  -0.5
+## 4 combo3  Test  29.8   37.7  29.8  15.7   15.7   NaN   NaN  -0.5
+## 5 esm     Test  24.5   80.3  76.5 -11.4   55.2   NaN   NaN  -0.5
+## 6 prophet Test  -1.20  13.3  13.3  -6.67  11.9   NaN   NaN  -0.5</code></pre>
+</div>
+<div id="final-forecast-accuracy" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Final Forecast Accuracy<a href="modeling.html#final-forecast-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The final model was the Prophet model, corresponding to a MAPE of 11.9% on the validation.</p>
+<p>I combined the training and validation sets to update the model parameters before forecasting the test dataset, or Q3 2024. The final model had a prediction of 168 units of Hyaluronic Acid for Clinic G, corresponding to a MAPE of 25.6%.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modeling.html#cb50-1" tabindex="-1"></a><span class="co"># Use combined training and validation to create final prophet model for 2024 Q3 prediction</span></span>
+<span id="cb50-2"><a href="modeling.html#cb50-2" tabindex="-1"></a>model_final <span class="ot">&lt;-</span> train_val <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="modeling.html#cb50-3" tabindex="-1"></a>  <span class="fu">model</span>(</span>
+<span id="cb50-4"><a href="modeling.html#cb50-4" tabindex="-1"></a>    <span class="at">prophetfinal =</span> <span class="fu">prophet</span>(total_hyaluronic <span class="sc">~</span> <span class="fu">xreg</span>(promotion.days) <span class="sc">+</span> <span class="fu">growth</span>(<span class="st">&quot;linear&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb50-5"><a href="modeling.html#cb50-5" tabindex="-1"></a>                             <span class="fu">season</span>(<span class="at">period =</span> <span class="st">&quot;year&quot;</span>, <span class="at">type=</span><span class="st">&quot;multiplicative&quot;</span>))</span>
+<span id="cb50-6"><a href="modeling.html#cb50-6" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## n.changepoints greater than number of observations. Using 7</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modeling.html#cb52-1" tabindex="-1"></a><span class="co"># Predict final forecast for Q3 2024 using the final model</span></span>
+<span id="cb52-2"><a href="modeling.html#cb52-2" tabindex="-1"></a>prophet_forecast_final <span class="ot">&lt;-</span> model_final <span class="sc">%&gt;%</span> <span class="fu">select</span>(prophetfinal) <span class="sc">%&gt;%</span> fabletools<span class="sc">::</span><span class="fu">forecast</span>(test)</span>
+<span id="cb52-3"><a href="modeling.html#cb52-3" tabindex="-1"></a>prophet_forecast_final</span></code></pre></div>
+<pre><code>## # A fable: 1 x 6 [1Q]
+## # Key:     .model [1]
+##   .model       sale.qtr total_hyaluronic .mean sale.dummyqtr promotion.days
+##   &lt;chr&gt;           &lt;qtr&gt;           &lt;dist&gt; &lt;dbl&gt; &lt;fct&gt;                  &lt;dbl&gt;
+## 1 prophetfinal  2024 Q3     sample[5000]  168. 3                         13</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modeling.html#cb54-1" tabindex="-1"></a><span class="co"># Calculate final accuracy for Q3 2024 forecast</span></span>
+<span id="cb54-2"><a href="modeling.html#cb54-2" tabindex="-1"></a>fabletools<span class="sc">::</span><span class="fu">accuracy</span>(prophet_forecast_final, test)</span></code></pre></div>
+<pre><code>## Warning: 1 error encountered
+## [1] subscript out of bounds</code></pre>
+<pre><code>## # A tibble: 1 × 10
+##   .model       .type    ME  RMSE   MAE   MPE  MAPE  MASE RMSSE  ACF1
+##   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 prophetfinal Test  -34.3  34.3  34.3 -25.6  25.6   NaN   NaN    NA</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-analysis-and-cleaning.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mgstachn/SkinLaundry_Forecasting/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/mgstachn/SkinLaundry_Forecasting/blob/main/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
